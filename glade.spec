@@ -75,6 +75,8 @@ Summary:	Header files for Glade library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Glade
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	gtk+3-devel >= 3.0.2
+Requires:	libxml2-devel >= 1:2.4.0
 
 %description devel
 Header files for Glade library.
