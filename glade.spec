@@ -6,12 +6,12 @@
 Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
-Version:	3.10.0
+Version:	3.10.2
 Release:	1
 License:	GPL v2 and LGPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.10/%{name}-%{version}.tar.bz2
-# Source0-md5:	70c61582bdc6e9a852b29f3d172ddd4e
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.10/%{name}-%{version}.tar.xz
+# Source0-md5:	b4363ccd9024a6ec7a82175317a5b6d1
 URL:		http://glade.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.11
@@ -28,6 +28,8 @@ BuildRequires:	pkgconfig
 BuildRequires:	python-pygobject-devel >= 2.28.0
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	hicolor-icon-theme
