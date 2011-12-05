@@ -186,5 +186,5 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
-%{_gtkdocdir}/gladeui
+%{_gtkdocdir}/gladeui-2
 %endif
