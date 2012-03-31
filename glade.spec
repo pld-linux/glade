@@ -6,12 +6,12 @@
 Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
-Version:	3.10.2
+Version:	3.12.0
 Release:	1
 License:	GPL v2 and LGPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	b4363ccd9024a6ec7a82175317a5b6d1
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.12/%{name}-%{version}.tar.xz
+# Source0-md5:	bc743c2b94b674770b67cbc0c90fb3eb
 URL:		http://glade.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.11
@@ -19,18 +19,19 @@ BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-doc-utils >= 0.18.0
 BuildRequires:	gobject-introspection-devel >= 0.10.1
-BuildRequires:	gtk+3-devel >= 3.0.2
+BuildRequires:	gtk+3-devel >= 3.4.0
 BuildRequires:	gtk-doc >= 1.13
 BuildRequires:	intltool >= 0.41.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.4.0
 BuildRequires:	pkgconfig
-BuildRequires:	python-pygobject-devel >= 2.28.0
+BuildRequires:	python-pygobject3-devel >= 3.0.0
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post,postun):	gtk-update-icon-cache
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	hicolor-icon-theme
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -64,7 +65,7 @@ i inne.
 Summary:	Glade library
 Summary(pl.UTF-8):	Biblioteka Glade
 Group:		X11/Libraries
-Requires:	gtk+3 >= 3.0.2
+Requires:	gtk+3 >= 3.4.0
 
 %description libs
 Glade library.
@@ -77,7 +78,7 @@ Summary:	Header files for Glade library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Glade
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	gtk+3-devel >= 3.0.2
+Requires:	gtk+3-devel >= 3.4.0
 Requires:	libxml2-devel >= 1:2.4.0
 
 %description devel
@@ -144,9 +145,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_icon_cache hicolor
+%update_desktop_database_post
 
 %postun
 %update_icon_cache hicolor
+%update_desktop_database_postun
 
 %post libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
