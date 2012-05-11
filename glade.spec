@@ -6,12 +6,12 @@
 Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
-Version:	3.12.0
+Version:	3.12.1
 Release:	1
 License:	GPL v2 and LGPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.12/%{name}-%{version}.tar.xz
-# Source0-md5:	bc743c2b94b674770b67cbc0c90fb3eb
+# Source0-md5:	7923b7127a387db3a053062cd76e8263
 URL:		http://glade.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.11
