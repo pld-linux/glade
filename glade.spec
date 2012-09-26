@@ -6,12 +6,12 @@
 Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
-Version:	3.12.1
-Release:	2
+Version:	3.14.0
+Release:	1
 License:	GPL v2 and LGPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.12/%{name}-%{version}.tar.xz
-# Source0-md5:	7923b7127a387db3a053062cd76e8263
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.14/%{name}-%{version}.tar.xz
+# Source0-md5:	cd73934b7cd0dcb1c99a6d0589c73d48
 URL:		http://glade.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.11
@@ -19,8 +19,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-doc-utils >= 0.18.0
 BuildRequires:	gobject-introspection-devel >= 0.10.1
-BuildRequires:	gtk+3-devel >= 3.4.0
-BuildRequires:	gtk-doc >= 1.13
+BuildRequires:	gtk+3-devel >= 3.5.17
 BuildRequires:	intltool >= 0.41.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.4.0
@@ -29,6 +28,7 @@ BuildRequires:	python-pygobject3-devel >= 3.0.0
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	yelp-tools
 BuildRequires:	xz
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	desktop-file-utils
@@ -171,7 +171,7 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgladeui-2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgladeui-2.so.0
+%attr(755,root,root) %ghost %{_libdir}/libgladeui-2.so.4
 %{_libdir}/girepository-1.0/Gladeui-2.0.typelib
 
 %files devel
