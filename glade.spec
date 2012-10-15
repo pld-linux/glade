@@ -6,12 +6,12 @@
 Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
-Version:	3.14.0
+Version:	3.14.1
 Release:	1
 License:	GPL v2 and LGPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.14/%{name}-%{version}.tar.xz
-# Source0-md5:	cd73934b7cd0dcb1c99a6d0589c73d48
+# Source0-md5:	e6a5f2cae2b3147669fbe5101dc70dbf
 URL:		http://glade.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.11
@@ -19,7 +19,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-doc-utils >= 0.18.0
 BuildRequires:	gobject-introspection-devel >= 0.10.1
-BuildRequires:	gtk+3-devel >= 3.5.17
+BuildRequires:	gtk+3-devel >= 3.6.0
 BuildRequires:	intltool >= 0.41.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.4.0
@@ -66,7 +66,7 @@ i inne.
 Summary:	Glade library
 Summary(pl.UTF-8):	Biblioteka Glade
 Group:		X11/Libraries
-Requires:	gtk+3 >= 3.4.0
+Requires:	gtk+3 >= 3.6.0
 
 %description libs
 Glade library.
@@ -79,7 +79,7 @@ Summary:	Header files for Glade library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Glade
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	gtk+3-devel >= 3.4.0
+Requires:	gtk+3-devel >= 3.6.0
 Requires:	libxml2-devel >= 1:2.4.0
 
 %description devel
