@@ -8,21 +8,22 @@ Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
 Version:	3.14.2
 Release:	1
-License:	GPL v2 and LGPL v2
+License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.14/%{name}-%{version}.tar.xz
 # Source0-md5:	0998f456cdc82e1fd0e3f2fd44f5cf55
 URL:		http://glade.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-devel >= 0.17
 BuildRequires:	gnome-common
 BuildRequires:	gnome-doc-utils >= 0.18.0
 BuildRequires:	gobject-introspection-devel >= 0.10.1
 BuildRequires:	gtk+3-devel >= 3.6.0
+BuildRequires:	gtk-doc >= 1.13
 BuildRequires:	intltool >= 0.41.0
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	libxml2-devel >= 1:2.4.0
+BuildRequires:	libxml2-devel >= 2.4.0
 BuildRequires:	pkgconfig
 BuildRequires:	python-pygobject3-devel >= 3.0.0
 BuildRequires:	rpmbuild(find_lang) >= 1.23
@@ -67,6 +68,7 @@ Summary:	Glade library
 Summary(pl.UTF-8):	Biblioteka Glade
 Group:		X11/Libraries
 Requires:	gtk+3 >= 3.6.0
+Requires:	libxml2 >= 2.4.0
 
 %description libs
 Glade library.
@@ -80,7 +82,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Glade
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	gtk+3-devel >= 3.6.0
-Requires:	libxml2-devel >= 1:2.4.0
+Requires:	libxml2-devel >= 2.4.0
 
 %description devel
 Header files for Glade library.
@@ -135,11 +137,11 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm $RPM_BUILD_ROOT%{_libdir}/glade/modules/*.{a,la}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/glade/modules/*.{a,la}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
-%find_lang %{name} --with-gnome --with-omf
+%find_lang %{name} --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -152,12 +154,13 @@ rm -rf $RPM_BUILD_ROOT
 %update_icon_cache hicolor
 %update_desktop_database_postun
 
-%post libs -p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
+# NOTE: COPYING contains general notes; full GPL and LGPL texts are in COPYING.{GPL,LGPL}
+%doc AUTHORS COPYING ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/glade
 %attr(755,root,root) %{_bindir}/glade-previewer
 %dir %{_libdir}/glade
@@ -166,7 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/glade/modules/libgladepython.so
 %{_datadir}/glade
 %{_desktopdir}/glade.desktop
-%{_iconsdir}/hicolor/*/*/*.png
+%{_iconsdir}/hicolor/*/apps/glade.png
 
 %files libs
 %defattr(644,root,root,755)
