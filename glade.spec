@@ -2,12 +2,12 @@
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
 %bcond_without	static_libs	# don't build static libraries
-#
+
 Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
 Version:	3.18.1
-Release:	1
+Release:	2
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.18/%{name}-%{version}.tar.xz
@@ -107,6 +107,9 @@ Summary:	Glade API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki Glade
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 Glade API documentation.
