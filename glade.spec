@@ -6,12 +6,12 @@
 Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
-Version:	3.18.3
-Release:	2
+Version:	3.20.0
+Release:	1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.18/%{name}-%{version}.tar.xz
-# Source0-md5:	6852d6286683728e0ea40ca9b5d2416f
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.20/%{name}-%{version}.tar.xz
+# Source0-md5:	9964a2da14c5f845eae363889586ca43
 URL:		http://glade.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.11
@@ -25,6 +25,7 @@ BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 2.4.0
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
+BuildRequires:	python-devel >= 2
 BuildRequires:	python-pygobject3-devel >= 3.8.0
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
@@ -172,7 +173,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/glade/modules/libgladepython.so
 %{_datadir}/glade
 %{_desktopdir}/glade.desktop
-%{_iconsdir}/hicolor/*/apps/glade.png
+%{_iconsdir}/hicolor/*x*/apps/glade.png
+%{_iconsdir}/hicolor/scalable/apps/glade-symbolic.svg
 %{_datadir}/appdata/glade.appdata.xml
 %{_mandir}/man1/glade-previewer.1*
 %{_mandir}/man1/glade.1*
