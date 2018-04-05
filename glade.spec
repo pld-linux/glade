@@ -6,20 +6,22 @@
 Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
-Version:	3.20.0
+Version:	3.22.1
 Release:	1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.20/%{name}-%{version}.tar.xz
-# Source0-md5:	9964a2da14c5f845eae363889586ca43
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.22/%{name}-%{version}.tar.xz
+# Source0-md5:	226802cf3b06861240524805aa6fe6ff
 URL:		http://glade.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	gettext-devel >= 0.17
+BuildRequires:	glib2-devel >= 1:2.54.0
 BuildRequires:	gnome-common
 BuildRequires:	gobject-introspection-devel >= 1.32.0
-BuildRequires:	gtk+3-devel >= 3.12.0
+BuildRequires:	gtk+3-devel >= 3.20.0
 BuildRequires:	gtk-doc >= 1.13
+BuildRequires:	gtk-webkit4-devel >= 2.12.0
 BuildRequires:	intltool >= 0.41.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 2.4.0
@@ -68,7 +70,8 @@ i inne.
 Summary:	Glade library
 Summary(pl.UTF-8):	Biblioteka Glade
 Group:		X11/Libraries
-Requires:	gtk+3 >= 3.12.0
+Requires:	glib2 >= 1:2.54.0
+Requires:	gtk+3 >= 3.20.0
 Requires:	libxml2 >= 2.4.0
 
 %description libs
@@ -82,7 +85,7 @@ Summary:	Header files for Glade library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Glade
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	gtk+3-devel >= 3.12.0
+Requires:	gtk+3-devel >= 3.20.0
 Requires:	libxml2-devel >= 2.4.0
 
 %description devel
@@ -171,11 +174,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/glade/modules
 %attr(755,root,root) %{_libdir}/glade/modules/libgladegtk.so
 %attr(755,root,root) %{_libdir}/glade/modules/libgladepython.so
+%attr(755,root,root) %{_libdir}/glade/modules/libgladewebkit2gtk.so
 %{_datadir}/glade
 %{_desktopdir}/glade.desktop
 %{_iconsdir}/hicolor/*x*/apps/glade.png
-%{_iconsdir}/hicolor/scalable/apps/glade-symbolic.svg
-%{_datadir}/appdata/glade.appdata.xml
+%{_iconsdir}/hicolor/scalable/apps/*.svg
+%{_datadir}/metainfo/glade.appdata.xml
 %{_mandir}/man1/glade-previewer.1*
 %{_mandir}/man1/glade.1*
 
