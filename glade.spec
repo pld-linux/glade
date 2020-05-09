@@ -6,23 +6,21 @@
 Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
-Version:	3.22.2
+Version:	3.36.0
 Release:	1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.22/%{name}-%{version}.tar.xz
-# Source0-md5:	c074fa378c8f1ad80d20133c4ae6f42d
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.36/%{name}-%{version}.tar.xz
+# Source0-md5:	e5928b38dc628d5d8844f471576743c8
 URL:		https://glade.gnome.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	gettext-devel >= 0.17
+BuildRequires:	gettext-devel >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.54.0
-BuildRequires:	gnome-common
 BuildRequires:	gobject-introspection-devel >= 1.32.0
-BuildRequires:	gtk+3-devel >= 3.20.0
+BuildRequires:	gtk+3-devel >= 3.22.0
 BuildRequires:	gtk-doc >= 1.13
 BuildRequires:	gtk-webkit4-devel >= 2.12.0
-BuildRequires:	intltool >= 0.41.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 2.4.0
 BuildRequires:	libxslt-progs
@@ -71,7 +69,7 @@ Summary:	Glade library
 Summary(pl.UTF-8):	Biblioteka Glade
 Group:		X11/Libraries
 Requires:	glib2 >= 1:2.54.0
-Requires:	gtk+3 >= 3.20.0
+Requires:	gtk+3 >= 3.22.0
 Requires:	libxml2 >= 2.4.0
 
 %description libs
@@ -85,7 +83,7 @@ Summary:	Header files for Glade library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Glade
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	gtk+3-devel >= 3.20.0
+Requires:	gtk+3-devel >= 3.22.0
 Requires:	libxml2-devel >= 2.4.0
 
 %description devel
@@ -111,7 +109,7 @@ Summary:	Glade API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki Glade
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -125,13 +123,13 @@ Dokumentacja API biblioteki Glade.
 %setup -q
 
 %build
-%{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 %configure \
+	%{!?debug:--disable-debug} \
 	--disable-silent-rules \
 	%{__enable_disable apidocs gtk-doc} \
 	%{__enable_disable static_libs static} \
@@ -167,7 +165,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 # NOTE: COPYING contains general notes; full GPL and LGPL texts are in COPYING.{GPL,LGPL}
-%doc AUTHORS COPYING ChangeLog NEWS README TODO
+%doc AUTHORS COPYING ChangeLog NEWS TODO
 %attr(755,root,root) %{_bindir}/glade
 %attr(755,root,root) %{_bindir}/glade-previewer
 %dir %{_libdir}/glade
@@ -176,17 +174,18 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/glade/modules/libgladepython.so
 %attr(755,root,root) %{_libdir}/glade/modules/libgladewebkit2gtk.so
 %{_datadir}/glade
-%{_desktopdir}/glade.desktop
-%{_iconsdir}/hicolor/*x*/apps/glade.png
-%{_iconsdir}/hicolor/scalable/apps/*.svg
-%{_datadir}/metainfo/glade.appdata.xml
+%{_desktopdir}/org.gnome.Glade.desktop
+%{_iconsdir}/hicolor/scalable/apps/org.gnome.Glade.svg
+%{_iconsdir}/hicolor/symbolic/apps/glade-brand-symbolic.svg
+%{_iconsdir}/hicolor/symbolic/apps/org.gnome.Glade-symbolic.svg
+%{_datadir}/metainfo/org.gnome.Glade.appdata.xml
 %{_mandir}/man1/glade-previewer.1*
 %{_mandir}/man1/glade.1*
 
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgladeui-2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgladeui-2.so.6
+%attr(755,root,root) %ghost %{_libdir}/libgladeui-2.so.12
 %{_libdir}/girepository-1.0/Gladeui-2.0.typelib
 
 %files devel
