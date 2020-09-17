@@ -6,35 +6,38 @@
 Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
-Version:	3.36.0
+Version:	3.38.0
 Release:	1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.36/%{name}-%{version}.tar.xz
-# Source0-md5:	e5928b38dc628d5d8844f471576743c8
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.38/%{name}-%{version}.tar.xz
+# Source0-md5:	09ed7311fa2e81dad59f19115e212f2d
 URL:		https://glade.gnome.org/
-BuildRequires:	autoconf >= 2.52
-BuildRequires:	automake >= 1:1.11
 BuildRequires:	gettext-devel >= 0.19.8
-BuildRequires:	glib2-devel >= 1:2.54.0
+BuildRequires:	gjs-devel >= 1.64.0
+BuildRequires:	glib2-devel >= 1:2.64.0
 BuildRequires:	gobject-introspection-devel >= 1.32.0
-BuildRequires:	gtk+3-devel >= 3.22.0
+BuildRequires:	gtk+3-devel >= 3.24.0
 BuildRequires:	gtk-doc >= 1.13
-BuildRequires:	gtk-webkit4-devel >= 2.12.0
-BuildRequires:	libtool >= 2:2.2.6
+BuildRequires:	gtk-webkit4-devel >= 2.28
 BuildRequires:	libxml2-devel >= 2.4.0
 BuildRequires:	libxslt-progs
+BuildRequires:	meson >= 0.49.0
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 2
 BuildRequires:	python-pygobject3-devel >= 3.8.0
 BuildRequires:	rpmbuild(find_lang) >= 1.23
-BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	yelp-tools
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	gjs >= 1.64.0
+Requires:	gtk-webkit4 >= 2.28
 Requires:	hicolor-icon-theme
 Conflicts:	glade3 < 3.8.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -68,8 +71,8 @@ i inne.
 Summary:	Glade library
 Summary(pl.UTF-8):	Biblioteka Glade
 Group:		X11/Libraries
-Requires:	glib2 >= 1:2.54.0
-Requires:	gtk+3 >= 3.22.0
+Requires:	glib2 >= 1:2.64.0
+Requires:	gtk+3 >= 3.24.0
 Requires:	libxml2 >= 2.4.0
 
 %description libs
@@ -83,7 +86,8 @@ Summary:	Header files for Glade library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Glade
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	gtk+3-devel >= 3.22.0
+Requires:	glib2-devel >= 1:2.64.0
+Requires:	gtk+3-devel >= 3.24.0
 Requires:	libxml2-devel >= 2.4.0
 
 %description devel
@@ -122,29 +126,21 @@ Dokumentacja API biblioteki Glade.
 %prep
 %setup -q
 
+%if %{with static_libs}
+%{__sed} -i -e '/^libgladeui = / s/shared_library/library/' gladeui/meson.build
+%endif
+
 %build
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	%{!?debug:--disable-debug} \
-	--disable-silent-rules \
-	%{__enable_disable apidocs gtk-doc} \
-	%{__enable_disable static_libs static} \
-	--with-html-dir=%{_gtkdocdir}
-%{__make}
+%meson build \
+	-Dgladeui=true \
+	%{?with_apidocs:-Dgtk_doc=true}
+
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
-
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/glade/modules/*.{a,la}
-
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+%ninja_install -C build
 
 %find_lang %{name} --with-gnome
 
@@ -165,15 +161,19 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 # NOTE: COPYING contains general notes; full GPL and LGPL texts are in COPYING.{GPL,LGPL}
-%doc AUTHORS COPYING ChangeLog NEWS TODO
+%doc AUTHORS COPYING MAINTAINERS NEWS TODO
 %attr(755,root,root) %{_bindir}/glade
 %attr(755,root,root) %{_bindir}/glade-previewer
 %dir %{_libdir}/glade
 %dir %{_libdir}/glade/modules
+%attr(755,root,root) %{_libdir}/glade/modules/libgladegjs.so
+%attr(755,root,root) %{_libdir}/glade/modules/libgladeglade.so
 %attr(755,root,root) %{_libdir}/glade/modules/libgladegtk.so
 %attr(755,root,root) %{_libdir}/glade/modules/libgladepython.so
 %attr(755,root,root) %{_libdir}/glade/modules/libgladewebkit2gtk.so
 %{_datadir}/glade
+%{_datadir}/gettext/its/glade-catalog.its
+%{_datadir}/gettext/its/glade-catalog.loc
 %{_desktopdir}/org.gnome.Glade.desktop
 %{_iconsdir}/hicolor/scalable/apps/org.gnome.Glade.svg
 %{_iconsdir}/hicolor/symbolic/apps/glade-brand-symbolic.svg
@@ -185,7 +185,7 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgladeui-2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgladeui-2.so.12
+%attr(755,root,root) %ghost %{_libdir}/libgladeui-2.so.13
 %{_libdir}/girepository-1.0/Gladeui-2.0.typelib
 
 %files devel
