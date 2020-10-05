@@ -6,12 +6,12 @@
 Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
-Version:	3.38.0
+Version:	3.38.1
 Release:	1
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/glade/3.38/%{name}-%{version}.tar.xz
-# Source0-md5:	09ed7311fa2e81dad59f19115e212f2d
+# Source0-md5:	ff264c44e009448b7bc0f5481e2264d5
 URL:		https://glade.gnome.org/
 BuildRequires:	gettext-devel >= 0.19.8
 BuildRequires:	gjs-devel >= 1.64.0
@@ -113,9 +113,7 @@ Summary:	Glade API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki Glade
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "4.6"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description apidocs
 Glade API documentation.
