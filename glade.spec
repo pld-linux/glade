@@ -12,6 +12,7 @@ License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/glade/3.38/%{name}-%{version}.tar.xz
 # Source0-md5:	f1ac9d9b6404308efb74adc548289455
+Patch0:		meson0.61.patch
 URL:		https://glade.gnome.org/
 BuildRequires:	gettext-devel >= 0.19.8
 BuildRequires:	gjs-devel >= 1.64.0
@@ -123,6 +124,7 @@ Dokumentacja API biblioteki Glade.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %if %{with static_libs}
 %{__sed} -i -e '/^libgladeui = / s/shared_library/library/' gladeui/meson.build
