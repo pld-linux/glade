@@ -13,7 +13,7 @@ Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/glade/3.40/%{name}-%{version}.tar.xz
 # Source0-md5:	39393a82949a945d09105d35421c29ce
 URL:		https://glade.gnome.org/
-BuildRequires:	gettext-devel >= 0.19.8
+BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	gjs-devel >= 1.64.0
 BuildRequires:	glib2-devel >= 1:2.64.0
 BuildRequires:	gobject-introspection-devel >= 1.32.0
