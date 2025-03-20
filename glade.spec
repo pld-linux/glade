@@ -22,7 +22,7 @@ BuildRequires:	gtk-doc >= 1.13
 BuildRequires:	gtk-webkit4-devel >= 2.28
 BuildRequires:	libxml2-devel >= 2.4.0
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.49.0
+BuildRequires:	meson >= 0.53.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 2
