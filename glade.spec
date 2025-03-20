@@ -29,7 +29,7 @@ BuildRequires:	python-devel >= 2
 BuildRequires:	python-pygobject3-devel >= 3.8.0
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(find_lang) >= 1.23
-BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -130,16 +130,16 @@ Dokumentacja API biblioteki Glade.
 %endif
 
 %build
-%meson build \
+%meson \
 	-Dgladeui=true \
 	%{?with_apidocs:-Dgtk_doc=true}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %find_lang %{name} --with-gnome
 
