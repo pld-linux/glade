@@ -7,7 +7,7 @@ Summary:	User interface builder for GTK+ and GNOME
 Summary(pl.UTF-8):	Budowniczy interfejsów użytkownika dla GTK+ i GNOME
 Name:		glade
 Version:	3.40.0
-Release:	4
+Release:	5
 License:	GPL v2+ and LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/glade/3.40/%{name}-%{version}.tar.xz
